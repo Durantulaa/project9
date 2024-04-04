@@ -11,12 +11,8 @@ Description: header file for a doubly linked list with dummy nodes at head and t
 
 typedef int itemType;
 
-template <typename T>
 struct doubleNode
 {
-// T item; 
-// doubleNode <T>* next;
-
  doubleNode* prev;
  itemType item;
  doubleNode* next;
@@ -25,7 +21,7 @@ struct doubleNode
 class ListD
 {
  public:
-
+   
    ListD();
 
    /*
@@ -42,7 +38,7 @@ class ListD
    ListD(ListD* lst);
 
    ~ListD();
-
+  
    /*
    pre: ListD exists, pos is in the range [1..length+1]. For convenvience, the 
         first real (non-dummy) node is at position 1. 
@@ -69,7 +65,7 @@ class ListD
          is displayed on the screen, excluding the dummy nodes. 
    */
    void PrintForward();
-
+   
    /*
    pre: ListD exits.
    post: The item value of each node, from tail to head,
@@ -81,10 +77,10 @@ class ListD
    pre:  ListD exists
    post: Nodes in the list are in ascending order.  The algorithm used
          to put nodes in order is selection sort. Use the functions
-   found here: .../C-Search-Sort/1-selectionSort.cpp 
+	 found here: .../C-Search-Sort/1-selectionSort.cpp 
    */
    void Sort();
-
+  
  private:
    /*
    Comment: Used in conjunction with functions that insert and delete   
@@ -92,7 +88,7 @@ class ListD
          inserted. pos is in the range [1..length+1].
    Post: Returns insertion point A (see the implemention of insert), the node 
          just before the insertion point. So, n the case of insertion, 
-   if you wanted your new node to be in position 3, 
+	 if you wanted your new node to be in position 3, 
          A would point to the node in position 2.
    */
    doubleNode* FindPosition(int pos);

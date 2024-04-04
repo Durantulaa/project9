@@ -2,7 +2,7 @@
 #include <climits>
 using namespace std;
 
-#include "main.h"
+#include "4-ListD.h"
 
 ListD::ListD()
 {
@@ -25,7 +25,7 @@ ListD::ListD(ListD* lst)
 void ListD::InitializeVars()
 {
  length = 0;
-
+ 
 //create dummy nodes;
  head = new doubleNode;
  tail = new doubleNode;
@@ -59,7 +59,7 @@ doubleNode* ListD::FindPosition(int pos)
  }
  return cur;
 } 
-
+  
 void ListD::Insert(itemType item, int pos)
 {
  //new node goes between these two nodes
@@ -91,4 +91,4 @@ void ListD::PrintForward()
   i++;
  }
 }
-
+ 

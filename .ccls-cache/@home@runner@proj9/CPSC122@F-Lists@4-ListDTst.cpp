@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#include "main".h"
+#include "4-ListD.h"
 
 //All tests are controlled by a dedicated function
 void TestInsert();
@@ -38,7 +38,7 @@ void TestInsert()
  cout << "Passed Insert Test 3 if 100 appears in final position" << endl; 
  lst->PrintForward();
  cout << endl;
-
+ 
  cout << "test insert within the list" << endl; 
  lst->Insert(50,5);
  cout << "Passed Insert Test 4 if 50 appears in middle position" << endl; 
