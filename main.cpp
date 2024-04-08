@@ -95,6 +95,41 @@ void ListD::Insert(itemType item, int pos) {
   length++;
 } // done
 
+void ListD::Delete(int pos) {
+  doubleNode *ptA = FindPosition(pos);
+  doubleNode *delptB = ptA->next;
+  doubleNode *ptC = delptB->next;
+
+  ptA->next = ptC;
+  ptC->prev = ptA;
+  delete delptB;
+  length--;
+} // done
+
+int ListD::DeleteAll(itemType item) {
+  int count = 0;
+  doubleNode *cur = head->next;
+
+  while (cur != tail) {
+    if (cur->item == item) {
+      doubleNode *tmp = cur;
+      cur = cur->next;
+      delete tmp;
+      count++;
+      length--;
+    } else {
+      cur = cur->next;
+    }
+  }
+
+  return count;
+} // done
+
+void ListD::Sort() {
+
+  // selection sort
+} // not done
+
 void ListD::PrintForward() {
   doubleNode *cur = head->next;
 
@@ -120,46 +155,5 @@ void ListD::PrintBackward() {
   cout << endl;
 } // done
 
-void ListD::Delete(int pos) {
-  doubleNode *ptA = FindPosition(pos);
-  doubleNode *delptB = ptA->next;
-  doubleNode *ptC = delptB->next;
-
-  ptA->next = ptC;
-  ptC->prev = ptA;
-  delete delptB;
-  length--;
-} // done
-
-int ListD::DeleteAll(itemType item)
-{
-  int count = 0;
-  doubleNode *cur = head->next;
-
-  while(cur != tail) {
-    if(cur->item == item) {
-      doubleNode *tmp = cur;
-      cur = cur->next;
-      delete tmp;
-      count++;
-      length--;
-    }
-    else {
-      cur = cur->next;
-    }      
-    }
-
-   return count; 
-  } //done
-
-void ListD::Sort()
-{
-  
-  
-  
-  
-  //selection sort 
-} 
-
-//https://docs.google.com/document/d/189EUPz9t83PKBPAtBK05MzyNtTs74_CLYAPEx-lGeyw/edit
-//https://www.youtube.com/watch?v=2ybLD6_2gKM
+// https://docs.google.com/document/d/189EUPz9t83PKBPAtBK05MzyNtTs74_CLYAPEx-lGeyw/edit
+// https://www.youtube.com/watch?v=2ybLD6_2gKM

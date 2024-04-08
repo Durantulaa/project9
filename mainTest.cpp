@@ -14,28 +14,6 @@ int main() {
   TestDelete();
 }
 
-void TestDelete() {
-  ListD *lst2 = new ListD;
-  // int i=0;
-  // while ( i <= 10){
-  //   lst2->Insert(i, i);
-  //   i++;
-  // }
-
-  cout << "Passed if  0, 50, and 100 get deleted from the list \n" << endl;
-  lst2->Delete(50);
-  lst2->Delete(100);
-  lst2->Delete(0);
-  lst2->PrintForward();
-
-//   cout << "if this works everything in the list will be deleted \n";
-//   while ( i != 10){
-//   lst2->DeleteAll(i);
-//   i++;
-//   }
-//   lst2->PrintForward();
- } 
-
 void TestInsert() {
 
   ListD *lst = new ListD;
@@ -85,6 +63,36 @@ void TestCopyConstructor() {
   cout << "Reveresed Copy: " << endl;
   lst2->PrintBackward();
 
-   // delete lst1;
-   // delete lst2;
+  // delete lst1;
+  // delete lst2;
 }
+
+void TestDelete() {
+  ListD *lst2 = new ListD;
+  // int i=0;
+  // while ( i <= 10){
+  //   lst2->Insert(i, i);
+  //   i++;
+  // }
+
+  cout << "Passed if  0, 50, and 100 get deleted from the list \n" << endl;
+  lst2->Delete(50);
+  lst2->Delete(100);
+  lst2->Delete(0);
+  lst2->PrintForward();
+
+  //   cout << "if this works everything in the list will be deleted \n";
+  //   while ( i != 10){
+  //   lst2->DeleteAll(i);
+  //   i++;
+  //   }
+  //   lst2->PrintForward();
+}
+
+void testSort() {
+  ListD *lst3 = new ListD;
+  // lst3->Sort(lst3);
+}
+
+// fix deleteall and delete function
+//  make a function to check sort
