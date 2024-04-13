@@ -63,7 +63,7 @@ doubleNode *ListD::FindPosition(int pos) {
   // Inserting at the tail is a special case.  It can be made much more
   // efficient than this.
 
-  // if (pos <= 1 || pos > length){
+  // if (pos < 1 || pos > length){
   //   cout << "invalid pos \n";
   //   return nullptr;
   // }
@@ -97,6 +97,12 @@ void ListD::Insert(itemType item, int pos) {
 
 void ListD::Delete(int pos) {
   doubleNode *ptA = FindPosition(pos);
+  
+  // if (ptA == nullptr) {
+  //   cout << "Invalid position for deletion" << endl;
+  //   return;
+  // }
+  
   doubleNode *delptB = ptA->next;
   doubleNode *ptC = delptB->next;
 
@@ -104,6 +110,7 @@ void ListD::Delete(int pos) {
   ptC->prev = ptA;
   delete delptB;
   length--;
+  
 } // done
 
 int ListD::DeleteAll(itemType item) {
@@ -126,9 +133,29 @@ int ListD::DeleteAll(itemType item) {
 } // done
 
 void ListD::Sort() {
+  doubleNode *curr = head->next;
 
-  // selection sort
-} // not done
+  if (length == 1 || length == 0) {
+    cout << "List is sorted\n";
+    return;
+  }
+  
+  while (curr->next != nullptr) {
+    doubleNode *min = curr;
+    doubleNode *tmp = curr->next;
+
+    while (tmp != nullptr) {
+      if (tmp->item < min->item) {
+        min = tmp;
+      }
+      tmp = tmp->next;
+    }
+    itemType tmpI = curr->item;
+    curr->item = min->item;
+    min->item = tmpI;
+    curr = curr->next;
+  }
+}//done
 
 void ListD::PrintForward() {
   doubleNode *cur = head->next;
