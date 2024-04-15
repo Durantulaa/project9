@@ -7,21 +7,22 @@ Description: header file for a doubly linked list with dummy nodes at head and
 tail
 */
 
+#include <iostream>
+
 #ifndef LIST_H
 #define LIST_H
 
 typedef int itemType;
 
-// template <typename T>
+template <typename T> 
 struct doubleNode {
-  // T item;
-  // doubleNode <T>* next;
 
   doubleNode *prev;
-  itemType item;
+  T item;
   doubleNode *next;
 };
 
+template <typename T> 
 class ListD {
 public:
   ListD();
@@ -37,7 +38,7 @@ public:
   post: The current object is an exact and deep copy of what lst points
         to.
   */
-  ListD(ListD *lst);
+  ListD(const ListD<T> &lst);
 
   ~ListD();
 
@@ -46,7 +47,7 @@ public:
        first real (non-dummy) node is at position 1.
   post: new node is inserted at postion pos.
   */
-  void Insert(itemType item, int pos);
+  void Insert(T item, int pos);
 
   /*
   pre: ListD exists, pos is in the range [1..length].
@@ -59,7 +60,7 @@ public:
   post: All nodes containing item have been deleted.  Returns the
         number of nodes that have been deleted.
   */
-  int DeleteAll(itemType item);
+  int DeleteAll(T item);
 
   /*
   pre: ListD exists.
@@ -93,7 +94,7 @@ private:
   if you wanted your new node to be in position 3,
         A would point to the node in position 2.
   */
-  doubleNode *FindPosition(int pos);
+  doubleNode<T> *FindPosition(int pos);
 
   /*
   Comment: Used in constructors to prevent duplicate code
@@ -102,8 +103,8 @@ private:
   */
   void InitializeVars();
 
-  int length;       // length of the list
-  doubleNode *head; // points to the first dummy node
-  doubleNode *tail; // points to the last dummy node
+  int length;          // length of the list
+  doubleNode<T> *head; // points to the first dummy node
+  doubleNode<T> *tail; // points to the last dummy node
 };
 #endif

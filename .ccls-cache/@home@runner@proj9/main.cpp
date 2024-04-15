@@ -1,5 +1,5 @@
 /*
-Team Members: Steph Borla , Daisy , And Fady Youssef
+Team Members: Liya Tekie, Steph Borla , Daisy Barajas , And Fady Youssef
 Course: CPSC122
 Date Submitted: 4/07/2024
 Assignment Name: Project 9
@@ -11,12 +11,14 @@ using namespace std;
 
 #include "main.h"
 
-ListD::ListD() { InitializeVars(); } // done
+template <typename T> 
+ListD<T>::ListD() { InitializeVars(); } // done
 
-ListD::~ListD() {
+template <typename T> 
+ListD<T>::~ListD() {
   // Delete every node in list
-  doubleNode *curr = head->next;
-  doubleNode *tmp = curr;
+  doubleNode<T> *curr = head->next;
+  doubleNode<T> *tmp = curr;
 
   while (curr != tail) {
     curr = curr->next;
@@ -30,12 +32,13 @@ ListD::~ListD() {
   cout << "destructor called \n";
 } // done
 
-void ListD::InitializeVars() {
+template <typename T> 
+void ListD<T>::InitializeVars() {
   length = 0;
 
   // create dummy nodes;
-  head = new doubleNode;
-  tail = new doubleNode;
+  head = new doubleNode<T>;
+  tail = new doubleNode<T>;
 
   // set values for head dummy node;
   head->prev = NULL;
@@ -48,10 +51,11 @@ void ListD::InitializeVars() {
   tail->next = NULL;
 } // done
 
-ListD::ListD(ListD *lst) {
+template <typename T> 
+ListD<T>::ListD(const ListD<T> &lst) {
   InitializeVars();
   // returns a pointer to the first node, which is what we want here
-  doubleNode *cur = lst->FindPosition(2);
+  doubleNode<T> *cur = lst->FindPosition(2);
   for (int i = 1; i <= lst->length; i++) {
     cout << cur->item << endl;
     Insert(cur->item, i);
@@ -59,7 +63,8 @@ ListD::ListD(ListD *lst) {
   }
 } // done
 
-doubleNode *ListD::FindPosition(int pos) {
+template <typename T> 
+doubleNode<T> *ListD<T>::FindPosition(int pos) {
   // Inserting at the tail is a special case.  It can be made much more
   // efficient than this.
 
@@ -68,7 +73,7 @@ doubleNode *ListD::FindPosition(int pos) {
   //   return nullptr;
   // }
 
-  doubleNode *cur = head;
+  doubleNode<T> *cur = head;
   int i = 0; // begin at the dummy node
   while (i < pos - 1) {
     cur = cur->next;
@@ -77,49 +82,53 @@ doubleNode *ListD::FindPosition(int pos) {
   return cur;
 } // done
 
-void ListD::Insert(itemType item, int pos) {
-  doubleNode *tmp = new doubleNode;
+template <typename T> 
+void ListD<T>::Insert(T item, int pos) {
+  doubleNode<T> *tmp = new doubleNode<T>;
+
   // new node goes between these two nodes
-  doubleNode *insertPtA = FindPosition(pos);
-  doubleNode *insertPtB = insertPtA->next;
+  doubleNode<T> *insertPtA = FindPosition(pos);
+  doubleNode<T> *insertPtB = insertPtA->next;
 
   tmp->item = item;
+
+  // set pointers for nodes before and after the insertion point
   insertPtA->next = tmp;
   insertPtB->prev = tmp;
+
   tmp->prev = insertPtA;
   tmp->next = insertPtB;
 
-  // set pointers for nodes before and after the insertion point
-  //  insertPtA -> next = tmp;
-  //  insertPtB -> prev = tmp;
   length++;
 } // done
 
-void ListD::Delete(int pos) {
-  doubleNode *ptA = FindPosition(pos);
-  
+template <typename T> 
+void ListD<T>::Delete(int pos) {
+  doubleNode<T> *ptA = FindPosition(pos);
+
   // if (ptA == nullptr) {
   //   cout << "Invalid position for deletion" << endl;
   //   return;
   // }
-  
-  doubleNode *delptB = ptA->next;
-  doubleNode *ptC = delptB->next;
+
+  doubleNode<T> *delptB = ptA->next;
+  doubleNode<T> *ptC = delptB->next;
 
   ptA->next = ptC;
   ptC->prev = ptA;
   delete delptB;
   length--;
-  
+
 } // done
 
-int ListD::DeleteAll(itemType item) {
+template <typename T> 
+int ListD<T>::DeleteAll(T item) {
   int count = 0;
-  doubleNode *cur = head->next;
+  doubleNode<T> *cur = head->next;
 
   while (cur != tail) {
     if (cur->item == item) {
-      doubleNode *tmp = cur;
+      doubleNode<T> *tmp = cur;
       cur = cur->next;
       delete tmp;
       count++;
@@ -132,17 +141,18 @@ int ListD::DeleteAll(itemType item) {
   return count;
 } // done
 
-void ListD::Sort() {
-  doubleNode *curr = head->next;
+template <typename T> 
+void ListD<T>::Sort() {
+  doubleNode<T> *curr = head->next;
 
   if (length == 1 || length == 0) {
     cout << "List is sorted\n";
     return;
   }
-  
+
   while (curr->next != nullptr) {
-    doubleNode *min = curr;
-    doubleNode *tmp = curr->next;
+    doubleNode<T> *min = curr;
+    doubleNode<T> *tmp = curr->next;
 
     while (tmp != nullptr) {
       if (tmp->item < min->item) {
@@ -155,10 +165,11 @@ void ListD::Sort() {
     min->item = tmpI;
     curr = curr->next;
   }
-}//done
+} // done
 
-void ListD::PrintForward() {
-  doubleNode *cur = head->next;
+template <typename T> 
+void ListD<T>::PrintForward() {
+  doubleNode<T> *cur = head->next;
 
   int i = 0;
   while (i < length) {
@@ -170,8 +181,9 @@ void ListD::PrintForward() {
 
 } // done
 
-void ListD::PrintBackward() {
-  doubleNode *cur = tail->prev;
+template <typename T> 
+void ListD<T>::PrintBackward() {
+  doubleNode<T> *cur = tail->prev;
 
   int i = 0;
   while (i < length) {
