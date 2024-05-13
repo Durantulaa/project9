@@ -1,5 +1,5 @@
 /*
-Team Members: Liya Tekie, Steph Borla , Daisy Barajas , And Fady Youssef
+Team Members: Liya Tekie, Steph Borla, Daisy Barajas, And Fady Youssef
 Course: CPSC122
 Date Submitted: 4/07/2024
 Assignment Name: Project 9
@@ -42,14 +42,14 @@ void ListD<T>::InitializeVars() {
 
   // set values for head dummy node;
   head->prev = NULL;
-  head->item = INT_MIN;
+  //head->item = INT_MIN;
   head->next = tail;
 
   // set values for tail dummy node;
   tail->prev = head;
-  tail->item = INT_MAX;
+  //tail->item = INT_MAX;
   tail->next = NULL;
-} // done
+} // donemd
 
 template <typename T> 
 ListD<T>::ListD(const ListD<T> &lst) {
@@ -61,6 +61,7 @@ ListD<T>::ListD(const ListD<T> &lst) {
     Insert(cur->item, i);
     cur = cur->next;
   }
+  
 } // done
 
 template <typename T> 
@@ -75,7 +76,7 @@ doubleNode<T> *ListD<T>::FindPosition(int pos) {
 
   doubleNode<T> *cur = head;
   int i = 0; // begin at the dummy node
-  while (i < pos - 1) {
+  while (i < pos - 1) { // skip to the node before the one we want
     cur = cur->next;
     i++;
   }
@@ -167,33 +168,23 @@ void ListD<T>::Sort() {
   }
 } // done
 
-template <typename T> 
+template <typename T>
 void ListD<T>::PrintForward() {
   doubleNode<T> *cur = head->next;
-
-  int i = 0;
-  while (i < length) {
+  while (cur != tail) {
     cout << cur->item << endl;
     cur = cur->next;
-    i++;
   }
-  cout << endl;
-
 } // done
 
-template <typename T> 
+template <typename T>
 void ListD<T>::PrintBackward() {
   doubleNode<T> *cur = tail->prev;
-
-  int i = 0;
-  while (i < length) {
+  while (cur != head) {
     cout << cur->item << endl;
     cur = cur->prev;
-    i++;
   }
-  cout << endl;
 } // done
 
-// https://docs.google.com/document/d/189EUPz9t83PKBPAtBK05MzyNtTs74_CLYAPEx-lGeyw/edit
-// https://www.youtube.com/watch?v=2ybLD6_2gKM
-// make sure to use template
+
+// g++ main.cpp mainTest.cpp -o a.out
